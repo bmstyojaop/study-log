@@ -32,7 +32,7 @@ const icons = [
   { icon: "/assets/img/testicon7.jpg" },
   { icon: "/assets/img/testicon8.jpg" },
   { icon: "/assets/img/testicon9.jpg" },
-  { icon: "/assets/img/testicon10.jpg" },
+  { icon: "/assets/img/testicon10.jpg" }
 ]
 
 const App: FC = () => {
@@ -46,7 +46,8 @@ const App: FC = () => {
         justify-center
       "
       >
-        <div className="container flex flex-col items-center pt-4 md:px-4 md:flex-row md:items-start md:justify-around  md:flex-wrap">
+        <div
+          className="container flex flex-col items-center pt-4 md:flex-row md:flex-wrap md:items-start md:justify-around md:px-4">
           {icons.map((icon) => (
             <Card key={icon.icon} iconPath={icon.icon} />
           ))}
