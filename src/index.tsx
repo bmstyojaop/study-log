@@ -1,15 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "./index.css";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
+
+import reportWebVitals from "./reportWebVitals";
+import Home from "./routes/Home";
+
+const router = createBrowserRouter(createRoutesFromElements(<Route path="/" element={<Home />}></Route>));
+
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
