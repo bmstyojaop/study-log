@@ -18,11 +18,18 @@ module.exports = {
   parserOptions: {
     sourceType: "module",
   },
-  plugins: ["sort-keys-custom-order", "react", "@typescript-eslint", "simple-import-sort", "import", "unused-imports"],
+  plugins: [
+    "sort-keys-custom-order",
+    "react",
+    "@typescript-eslint",
+    "simple-import-sort",
+    "import",
+    "unused-imports",
+  ],
   rules: {
-    // ソートする JS オブジェクトの場合
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
     "sort-keys-custom-order/object-keys": ["error", { orderedKeys: ["id", "name", "title"] }],
-    // TS タイプのソート
     "sort-keys-custom-order/type-keys": ["error", { orderedKeys: ["id", "name", "title"] }],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
@@ -30,7 +37,8 @@ module.exports = {
     "import/newline-after-import": "error", // import後に改行
     "import/no-duplicates": "error", // 同じファイルのimportをマージ
     "unused-imports/no-unused-imports": "error",
-    "react/prop-types": "error", // PropsのTypeを強制
+    // TS タイプのソート
+    "react/prop-types": "off",
     "no-undef": "error", // 未定義の変数をエラー
     "no-var": "error",
   },
