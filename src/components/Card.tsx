@@ -9,7 +9,11 @@ export const Card: FC<CardProps> = (props) => {
     <article className="h-52 w-96 p-3 md:w-100">
       <div className="flex h-full w-full rounded-lg bg-white p-3 shadow-md">
         <div className="w-1/5">
-          <img className="aspect-square w-full rounded-full border-2 shadow-sm" alt="アイコン" src={props.iconPath} />
+          <img
+            className="aspect-square w-full rounded-full border-2 shadow-sm"
+            alt="アイコン"
+            src={props.iconPath}
+          />
         </div>
         <div className="w-full pt-2 pl-2 divide-y divide-sky-200">
           <div className="h-2/5">
