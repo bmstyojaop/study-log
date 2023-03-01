@@ -10,9 +10,9 @@ export const Layout: FC<layoutProps> = ({ isAuth }) => {
   return (
     <div>
       <Header isAuth={isAuth} />
-      <main className="bg-gray-200">
+      <div className="bg-gray-200 py-10">
         <Outlet />
-      </main>
+      </div>
     </div>
   );
 };

@@ -3,10 +3,10 @@ import { Link, Route, Routes } from "react-router-dom";
 
 import { SignIn } from "./components/SignIn";
 import { SignOut } from "./components/SignOut";
-import { CreatePost } from "./routes/CreatePost";
 import Home from "./routes/Home";
 import { Layout } from "./routes/Layout";
 import { MyPage } from "./routes/MyPage";
+import { RecordStudy } from "./routes/RecordStudy";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -14,10 +14,10 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout isAuth={isAuth} />}>
         <Route index element={<Home />} />
-        <Route path="mypage" element={<MyPage />} />
-        <Route path="createpost" element={<CreatePost />}></Route>
-        <Route path="/signin" element={<SignIn setIsAuth={setIsAuth} />}></Route>
-        <Route path="/signout" element={<SignOut setIsAuth={setIsAuth} />}></Route>
+        <Route path="my-page" element={<MyPage />} />
+        <Route path="record-study" element={<RecordStudy />}></Route>
+        <Route path="/login" element={<SignIn setIsAuth={setIsAuth} />}></Route>
+        <Route path="/logout" element={<SignOut setIsAuth={setIsAuth} />}></Route>
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>

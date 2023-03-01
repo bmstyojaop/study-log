@@ -37,8 +37,8 @@ const icons = [
 
 const Home: FC = () => {
   return (
-    <div className=" w-screen h-screen flex justify-center">
-      <div className="container flex flex-col items-center pt-4 md:flex-row md:flex-wrap md:items-start md:justify-around md:px-4">
+    <div className=" w-screen  hidden-scrollbar overflow-hidden flex justify-center">
+      <div className="h-full hidden-scrollbar overflow-scroll container flex flex-col items-center pt-4 md:flex-row md:flex-wrap md:items-start md:justify-around md:px-4">
         <Cards iconUrl={icons} />
       </div>
     </div>

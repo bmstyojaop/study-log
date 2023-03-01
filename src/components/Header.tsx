@@ -6,8 +6,8 @@ type headerProps = {
 };
 export const Header: FC<headerProps> = ({ isAuth }) => {
   return (
-    <header className="z-50 h-24 select-none rerative">
-      <div className="container relative mx-auto flex h-24 flex-wrap items-center justify-between overflow-hidden border-b border-gray-200 font-medium sm:px-4 md:overflow-visible lg:justify-center lg:px-0">
+    <header className="z-50 h-20 select-none relative">
+      <div className="container relative mx-auto flex h-20 flex-wrap items-center justify-between overflow-hidden border-b border-gray-200 font-medium sm:px-4 md:overflow-visible lg:justify-center lg:px-0">
         <div className="flex h-full w-1/4 items-center justify-start pr-4">
           <Link to="/" className="inline-block py-4 md:py-0">
             <span className="p-1 text-xl font-black leading-none text-gray-900">StudyLog</span>
@@ -22,36 +22,28 @@ export const Header: FC<headerProps> = ({ isAuth }) => {
               ホーム
             </Link>
             <Link
-              to="/mypage"
+              to="/record-study"
               className="mx-0 inline-block w-full py-2 text-left font-medium text-gray-700 hover:text-indigo-600 md:mx-2 md:w-auto md:px-0 md:text-center lg:mx-3"
             >
               記録
             </Link>
             <Link
-              to="/setting"
+              to="/my-page"
               className="mx-0 inline-block w-full py-2 text-left font-medium text-gray-700 hover:text-indigo-600 md:mx-2 md:w-auto md:px-0 md:text-center lg:mx-3"
             >
-              設定
+              マイページ
             </Link>
           </nav>
           <nav className="flex w-full flex-col items-start justify-end pt-4 md:w-1/3 md:flex-row md:items-center md:py-0">
             {isAuth ? (
               <Link
-                to={"signOut"}
+                to="logout"
                 className="mr-0 w-full px-3 py-2 text-gray-700 md:mr-2 md:w-auto lg:mr-3"
               >
-                サインアウト
+                ログアウト
               </Link>
             ) : (
-              <>
-                <Link to="/signin">ログイン</Link>
-                <Link
-                  to=""
-                  className="inline-flex w-full items-center bg-indigo-600 px-6 py-3 text-sm font-medium leading-4 text-white hover:bg-indigo-500 focus:outline-none focus:ring-0 focus:ring-indigo-600 focus:ring-offset-2 md:focus:ring-2 md:w-auto md:rounded-full md:px-3 lg:px-5"
-                >
-                  新規登録
-                </Link>
-              </>
+              <Link to="/login">ログイン</Link>
             )}
           </nav>
         </div>
