@@ -4,7 +4,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Card } from "../components/Card";
 import { db } from "../firebase";
 
-interface STUDYLOG {
+type StudyLog = {
   id: string;
   title: string;
   author: {
@@ -14,9 +14,9 @@ interface STUDYLOG {
   detail: string;
   hour: string;
   minute: string;
-}
+};
 const Home: FC = () => {
-  const [studyLog, setStudyLog] = useState<STUDYLOG[]>([]);
+  const [studyLog, setStudyLog] = useState<StudyLog[]>([]);
   useEffect(() => {
     // async関数を使用する時はuseEffectに渡す関数内でさらに関数を宣言する必要がある。
     const getStudyLogs = async () => {
