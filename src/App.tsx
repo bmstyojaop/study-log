@@ -14,8 +14,8 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout isAuth={isAuth} />}>
         <Route index element={<Home />} />
-        <Route path="my-page" element={<MyPage />} />
-        <Route path="record-study" element={<RecordStudy />}></Route>
+        <Route path="my-page" element={<MyPage isAuth={isAuth} />} />
+        <Route path="record-study" element={<RecordStudy isAuth={isAuth} />}></Route>
         <Route path="/login" element={<SignIn setIsAuth={setIsAuth} />}></Route>
         <Route path="/logout" element={<SignOut setIsAuth={setIsAuth} />}></Route>
         <Route path="*" element={<NoMatch />} />

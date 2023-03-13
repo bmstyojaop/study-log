@@ -1,5 +1,17 @@
-import React from "react";
+import React, { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const MyPage = () => {
+type MyPageProps = {
+  isAuth: boolean;
+};
+
+export const MyPage: FC<MyPageProps> = ({ isAuth }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+  }, []);
   return <div>マイページ</div>;
 };

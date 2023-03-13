@@ -1,10 +1,14 @@
 import { addDoc, collection } from "firebase/firestore";
-import React, { ChangeEventHandler, FormEvent, useCallback, useState } from "react";
+import React, { ChangeEventHandler, FC, FormEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { auth, db } from "../firebase";
 
-export const RecordStudy = () => {
+type RecordStudyProps = {
+  isAuth: boolean;
+};
+
+export const RecordStudy: FC<RecordStudyProps> = ({ isAuth }) => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [hour, setHour] = useState("");
@@ -43,6 +47,12 @@ export const RecordStudy = () => {
     });
     navigate("/");
   };
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+  }, []);
 
   return (
     <div className="flex w-full justify-center h-[90vh]">

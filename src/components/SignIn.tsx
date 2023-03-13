@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 import { auth, provider } from "../firebase";
 
-type signInProps = {
+type SignInProps = {
   setIsAuth: Dispatch<SetStateAction<boolean>>;
 };
-export const SignIn: FC<signInProps> = ({ setIsAuth }) => {
+export const SignIn: FC<SignInProps> = ({ setIsAuth }) => {
   const navigate = useNavigate();
   const loginWithGoogle = () => {
     signInWithPopup(auth, provider).then(() => {
