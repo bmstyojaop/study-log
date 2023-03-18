@@ -1,10 +1,23 @@
-import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import React, { Dispatch, FC, SetStateAction } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { auth } from "../firebase";
 
 type HeaderProps = {
   isAuth: boolean;
+  setIsAuth: Dispatch<SetStateAction<boolean>>;
 };
-export const Header: FC<HeaderProps> = ({ isAuth }) => {
+export const Header: FC<HeaderProps> = ({ isAuth, setIsAuth }) => {
+  const navigate = useNavigate();
+  const signOutGoogle = () => {
+    signOut(auth).then(() => {
+      localStorage.clear();
+      setIsAuth(false);
+      navigate("/");
+    });
+  };
+
   return (
     <header className="z-50 h-20 select-none relative">
       <div className="container relative mx-auto flex h-20 flex-wrap items-center justify-between overflow-hidden border-b border-gray-200 font-medium sm:px-4 md:overflow-visible lg:justify-center lg:px-0">
@@ -40,12 +53,12 @@ export const Header: FC<HeaderProps> = ({ isAuth }) => {
           </nav>
           <nav className="flex w-full flex-col items-start justify-end pt-4 md:w-1/3 md:flex-row md:items-center md:py-0">
             {isAuth ? (
-              <Link
-                to="logout"
+              <button
+                onClick={signOutGoogle}
                 className="mr-0 w-full px-3 py-2 text-gray-700 md:mr-2 md:w-auto lg:mr-3"
               >
                 ログアウト
-              </Link>
+              </button>
             ) : (
               <Link to="/login">ログイン</Link>
             )}

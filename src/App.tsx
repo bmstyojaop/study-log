@@ -12,7 +12,7 @@ const App = () => {
   const [isAuth, setIsAuth] = useState(false);
   return (
     <Routes>
-      <Route path="/" element={<Layout isAuth={isAuth} />}>
+      <Route path="/" element={<Layout isAuth={isAuth} setIsAuth={setIsAuth} />}>
         <Route index element={<Home />} />
         <Route path="my-page" element={<MyPage isAuth={isAuth} />} />
         <Route path="record-study" element={<RecordStudy isAuth={isAuth} />}></Route>
