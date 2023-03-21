@@ -1,16 +1,28 @@
-import React, { FC } from "react";
+import { deleteDoc, doc } from "firebase/firestore";
+import React, { Dispatch, FC, SetStateAction } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
+import { db } from "../firebase";
+import { StudyLog } from "../types/types";
+
 type CardProps = {
+  id: string;
   title: string;
   detail: string;
   hour: string;
   iconPath: string;
   minute: string;
+  setStudyLog: Dispatch<SetStateAction<StudyLog[]>>;
+  studyLog: StudyLog[];
   username: string;
 };
 
 export const Card: FC<CardProps> = (props) => {
+  const handleDelete = async (id: string) => {
+    await deleteDoc(doc(db, "studylog", id));
+    props.setStudyLog(props.studyLog.filter((doc: StudyLog) => doc.id != id));
+    console.log("handledelete");
+  };
   return (
     <article className="h-52 w-96 p-3 md:w-100">
       <div className="flex h-full w-full rounded-lg bg-white p-3 shadow-md">
@@ -20,10 +32,12 @@ export const Card: FC<CardProps> = (props) => {
             alt="アイコン"
             src={props?.iconPath}
           />
-          <RiDeleteBin6Line
-            className="text-red-500 opacity-60 transition duration-150 ease-in-out hover:opacity-100"
-            size={"2rem"}
-          />
+          <button onClick={() => handleDelete(props.id)}>
+            <RiDeleteBin6Line
+              className="text-red-500 opacity-60 transition duration-150 ease-in-out hover:opacity-100"
+              size={"2rem"}
+            />
+          </button>
         </div>
         <div className="w-full pt-2 pl-2 divide-y divide-sky-200">
           <div className="h-2/5">
