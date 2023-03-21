@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import React, { FC, useEffect, useState } from "react";
 
 import { Card } from "../components/Card";
@@ -12,7 +12,8 @@ const Home: FC = () => {
     console.log("useEffect");
     // async関数を使用する時はuseEffectに渡す関数内でさらに関数を宣言する必要がある。
     const getStudyLogs = async () => {
-      const data = await getDocs(collection(db, "studylog"));
+      const studylogRef = collection(db, "studylog");
+      const data = await getDocs(query(studylogRef, orderBy("createdAt", "desc")));
       setStudyLog(
         data.docs.map((doc) => ({
           id: doc.id,
