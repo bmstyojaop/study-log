@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { ChangeEventHandler, FC, FormEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -41,9 +41,11 @@ export const RecordStudy: FC<RecordStudyProps> = ({ isAuth }) => {
         id: auth.currentUser?.uid,
         username: auth.currentUser?.displayName,
       },
+      createdAt: serverTimestamp(),
       detail: detail,
-      hour: hour,
-      minute: minute,
+      hour: hour == "" ? "00" : hour,
+      minute: minute == "" ? "00" : minute,
+      updatedAt: serverTimestamp(),
     });
     navigate("/");
   };
