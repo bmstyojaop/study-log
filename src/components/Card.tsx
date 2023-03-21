@@ -2,7 +2,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { StudyLog } from "../types/types";
 
 type CardProps = {
@@ -14,6 +14,7 @@ type CardProps = {
   minute: string;
   setStudyLog: Dispatch<SetStateAction<StudyLog[]>>;
   studyLog: StudyLog[];
+  uid: string;
   username: string;
 };
 
@@ -32,12 +33,14 @@ export const Card: FC<CardProps> = (props) => {
             alt="アイコン"
             src={props?.iconPath}
           />
-          <button onClick={() => handleDelete(props.id)}>
-            <RiDeleteBin6Line
-              className="text-red-500 opacity-60 transition duration-150 ease-in-out hover:opacity-100"
-              size={"2rem"}
-            />
-          </button>
+          {props.uid === auth.currentUser?.uid ? (
+            <button onClick={() => handleDelete(props.id)}>
+              <RiDeleteBin6Line
+                className="text-red-500 opacity-60 transition duration-150 ease-in-out hover:opacity-100"
+                size={"2rem"}
+              />
+            </button>
+          ) : null}
         </div>
         <div className="w-full pt-2 pl-2 divide-y divide-sky-200">
           <div className="h-2/5">

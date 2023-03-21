@@ -49,6 +49,7 @@ const Home: FC = () => {
               username={card.author.username}
               studyLog={studyLog}
               setStudyLog={setStudyLog}
+              uid={card.author.id}
             />
           ))}
         </div>
