@@ -1,17 +1,17 @@
-import React, { Dispatch, FC, SetStateAction } from "react";
+import type { User } from "@firebase/auth";
+import React, { FC } from "react";
 import { Outlet } from "react-router-dom";
 
 import { Header } from "../components/Header";
 
 type layoutProps = {
-  isAuth: boolean;
-  setIsAuth: Dispatch<SetStateAction<boolean>>;
+  user: User | null;
 };
 
-export const Layout: FC<layoutProps> = ({ isAuth, setIsAuth }) => {
+export const Layout: FC<layoutProps> = ({ user }) => {
   return (
     <div>
-      <Header isAuth={isAuth} setIsAuth={setIsAuth} />
+      <Header user={user} />
       <div className="bg-gray-200 py-10">
         <Outlet />
       </div>

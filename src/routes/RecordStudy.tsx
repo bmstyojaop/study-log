@@ -1,3 +1,4 @@
+import type { User } from "@firebase/auth";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { ChangeEventHandler, FC, FormEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -5,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase";
 
 type RecordStudyProps = {
-  isAuth: boolean;
+  user: User | null;
 };
 
-export const RecordStudy: FC<RecordStudyProps> = ({ isAuth }) => {
+export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [hour, setHour] = useState("");
@@ -51,7 +52,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ isAuth }) => {
   };
 
   useEffect(() => {
-    if (!isAuth) {
+    if (!user) {
       navigate("/login");
     }
   }, []);

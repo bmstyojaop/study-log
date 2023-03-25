@@ -1,19 +1,18 @@
+import type { User } from "@firebase/auth";
 import { signOut } from "firebase/auth";
-import React, { Dispatch, FC, SetStateAction } from "react";
+import React, { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { auth } from "../firebase";
 
 type HeaderProps = {
-  isAuth: boolean;
-  setIsAuth: Dispatch<SetStateAction<boolean>>;
+  user: User | null;
 };
-export const Header: FC<HeaderProps> = ({ isAuth, setIsAuth }) => {
+
+export const Header: FC<HeaderProps> = ({ user }) => {
   const navigate = useNavigate();
   const signOutGoogle = () => {
     signOut(auth).then(() => {
-      localStorage.clear();
-      setIsAuth(false);
       navigate("/");
     });
   };
@@ -34,7 +33,7 @@ export const Header: FC<HeaderProps> = ({ isAuth, setIsAuth }) => {
             >
               ホーム
             </Link>
-            {isAuth ? (
+            {user ? (
               <>
                 <Link
                   to="/record-study"
@@ -52,7 +51,7 @@ export const Header: FC<HeaderProps> = ({ isAuth, setIsAuth }) => {
             ) : null}
           </nav>
           <nav className="flex w-full flex-col items-start justify-end pt-4 md:w-1/3 md:flex-row md:items-center md:py-0">
-            {isAuth ? (
+            {user ? (
               <button
                 onClick={signOutGoogle}
                 className="mr-0 w-full px-3 py-2 text-gray-700 md:mr-2 md:w-auto lg:mr-3"

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import type { User } from "@firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 
 import { SignIn } from "./components/SignIn";
@@ -9,15 +11,22 @@ import { MyPage } from "./routes/MyPage";
 import { RecordStudy } from "./routes/RecordStudy";
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    return onAuthStateChanged(getAuth(), (user: User | null) => {
+      setUser(user);
+      console.log(user?.displayName);
+    });
+  }, []);
   return (
     <Routes>
-      <Route path="/" element={<Layout isAuth={isAuth} setIsAuth={setIsAuth} />}>
+      <Route path="/" element={<Layout user={user} />}>
         <Route index element={<Home />} />
-        <Route path="my-page" element={<MyPage isAuth={isAuth} />} />
-        <Route path="record-study" element={<RecordStudy isAuth={isAuth} />}></Route>
-        <Route path="/login" element={<SignIn setIsAuth={setIsAuth} />}></Route>
-        <Route path="/logout" element={<SignOut setIsAuth={setIsAuth} />}></Route>
+        <Route path="my-page" element={<MyPage user={user} />} />
+        <Route path="record-study" element={<RecordStudy user={user} />}></Route>
+        <Route path="/login" element={<SignIn />}></Route>
+        <Route path="/logout" element={<SignOut />}></Route>
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
@@ -27,9 +36,9 @@ const App = () => {
 function NoMatch() {
   return (
     <div>
-      <h2>Nothing to see here!</h2>
+      <h2>ページが見つかりませんでした。</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to="/">ホームに戻る</Link>
       </p>
     </div>
   );

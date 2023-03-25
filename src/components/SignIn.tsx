@@ -1,18 +1,12 @@
 import { signInWithPopup } from "firebase/auth";
-import { Dispatch, FC, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { auth, provider } from "../firebase";
 
-type SignInProps = {
-  setIsAuth: Dispatch<SetStateAction<boolean>>;
-};
-export const SignIn: FC<SignInProps> = ({ setIsAuth }) => {
+export const SignIn = () => {
   const navigate = useNavigate();
   const loginWithGoogle = () => {
     signInWithPopup(auth, provider).then(() => {
-      localStorage.setItem("isAuth", "true");
-      setIsAuth(true);
       navigate("/");
     });
   };
