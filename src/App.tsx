@@ -16,7 +16,6 @@ const App = () => {
   useEffect(() => {
     return onAuthStateChanged(getAuth(), (user: User | null) => {
       setUser(user);
-      console.log(user?.displayName);
     });
   }, []);
   return (
@@ -25,8 +24,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="my-page" element={<MyPage user={user} />} />
         <Route path="record-study" element={<RecordStudy user={user} />}></Route>
-        <Route path="/login" element={<SignIn />}></Route>
-        <Route path="/logout" element={<SignOut />}></Route>
+        <Route path="/login" element={<SignIn user={user} />}></Route>
+        <Route path="/logout" element={<SignOut user={user} />}></Route>
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
