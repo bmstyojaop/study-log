@@ -1,6 +1,9 @@
 import type { User } from "@firebase/auth";
 import { signOut } from "firebase/auth";
 import React, { FC } from "react";
+import { AiOutlineAreaChart, AiOutlineHome } from "react-icons/ai";
+import { BsPencil } from "react-icons/bs";
+import { GoSignIn, GoSignOut } from "react-icons/go";
 import { Link, useNavigate } from "react-router-dom";
 
 import { auth } from "../firebase";
@@ -18,48 +21,41 @@ export const Header: FC<HeaderProps> = ({ user }) => {
   };
 
   return (
-    <header className="z-50 h-20 select-none relative">
-      <div className="container relative mx-auto flex h-20 flex-wrap items-center justify-between overflow-hidden border-b border-gray-200 font-medium sm:px-4 md:overflow-visible lg:justify-center lg:px-0">
+    <header className="h-20 select-none">
+      <div className="container mx-auto flex h-20 flex-wrap items-center overflow-hidden font-medium lg:justify-center">
         <div className="flex h-full w-1/4 items-center justify-start pr-4">
           <Link to="/" className="inline-block py-4 md:py-0">
             <span className="p-1 text-xl font-black leading-none text-gray-900">StudyLog</span>
           </Link>
         </div>
-        <div className="top-0 left-0 hidden h-full w-full items-start bg-gray-900 bg-opacity-50 p-4 text-sm md:absolute md:relative md:flex md:w-3/4 md:items-center md:bg-transparent md:p-0 lg:text-base">
-          <nav className="flex w-full flex-col items-start justify-center text-center space-x-6 md:mt-0 md:w-2/3 md:flex-row md:items-center lg:space-x-8">
-            <Link
-              to={"/"}
-              className="mx-0 ml-6 inline-block w-full py-2 text-left font-medium text-indigo-600 md:mx-2 md:ml-0 md:w-auto md:px-0 md:text-center lg:mx-3"
-            >
-              ホーム
+        <div className="flex justify-around items-center h-full w-3/4">
+          <nav className="w-full flex justify-around">
+            <Link to={"/"} className="hover:text-indigo-600 flex items-center">
+              <AiOutlineHome className="inline-block" size={20} />
+              <span className="hidden md:inline-block pl-2">ホーム</span>
             </Link>
             {user ? (
               <>
-                <Link
-                  to="/record-study"
-                  className="mx-0 inline-block w-full py-2 text-left font-medium text-gray-700 hover:text-indigo-600 md:mx-2 md:w-auto md:px-0 md:text-center lg:mx-3"
-                >
-                  記録
+                <Link to="/record-study" className="hover:text-indigo-600 flex items-center">
+                  <BsPencil className="inline-block" size={20} />
+                  <span className="hidden md:inline-block pl-2">記録</span>
                 </Link>
-                <Link
-                  to="/my-page"
-                  className="mx-0 inline-block w-full py-2 text-left font-medium text-gray-700 hover:text-indigo-600 md:mx-2 md:w-auto md:px-0 md:text-center lg:mx-3"
-                >
-                  マイページ
+                <Link to="/my-page" className="hover:text-indigo-600 flex items-center">
+                  <AiOutlineAreaChart className="inline-block" size={20} />
+                  <span className="hidden md:inline-block pl-2">マイページ</span>
                 </Link>
               </>
             ) : null}
-          </nav>
-          <nav className="flex w-full flex-col items-start justify-end pt-4 md:w-1/3 md:flex-row md:items-center md:py-0">
             {user ? (
-              <button
-                onClick={signOutGoogle}
-                className="mr-0 w-full px-3 py-2 text-gray-700 md:mr-2 md:w-auto lg:mr-3"
-              >
-                ログアウト
+              <button onClick={signOutGoogle} className="hover:text-indigo-600 flex items-center">
+                <GoSignIn className="inline-block" size={20} />
+                <span className="hidden md:inline-block pl-2">ログアウト</span>
               </button>
             ) : (
-              <Link to="/login">ログイン</Link>
+              <Link to="/login" className="hover:text-indigo-600 flex items-center">
+                <GoSignOut className="inline-block" size={20} />
+                <span className="hidden md:inline-block pl-2">ログイン</span>
+              </Link>
             )}
           </nav>
         </div>
