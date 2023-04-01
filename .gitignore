@@ -23,4 +23,22 @@ yarn-debug.log*
 yarn-error.log*
 
 #テスト用画像
-/assets/img/
+public/assets/img/testicon9.JPG
+public/assets/img/testicon8.jpg
+public/assets/img/testicon7.jpg
+public/assets/img/testicon6.jpg
+public/assets/img/testicon5.jpg
+public/assets/img/testicon4.jpg
+public/assets/img/testicon3.jpg
+public/assets/img/testicon2.jpg
+public/assets/img/testicon18.png
+public/assets/img/testicon17.png
+public/assets/img/testicon16.png
+public/assets/img/testicon15.png
+public/assets/img/testicon14.png
+public/assets/img/testicon13.png
+public/assets/img/testicon12.jpg
+public/assets/img/testicon11.jpg
+public/assets/img/testicon10.jpg
+public/assets/img/testicon1.jpg
+public/assets/img/testicon.png
