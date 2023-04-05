@@ -12,7 +12,7 @@ export const Layout: FC<layoutProps> = ({ user }) => {
   return (
     <div>
       <Header user={user} />
-      <div className="bg-gray-200 pt-5 pb-52 h-full w-full fixed overflow-scroll  ">
+      <div className="fixed h-full w-full overflow-scroll bg-gray-200 pt-5 pb-52  ">
         <Outlet />
       </div>
     </div>

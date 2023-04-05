@@ -25,7 +25,7 @@ export const Card: FC<CardProps> = (props) => {
     console.log("handledelete");
   };
   return (
-    <article className="h-52 w-96 p-3 md:w-100">
+    <article className="md:w-100 h-52 w-96 p-3">
       <div className="flex h-full w-full rounded-lg bg-white p-3 shadow-md">
         <div className="flex w-1/5 flex-col items-center justify-between">
           <img
@@ -42,7 +42,7 @@ export const Card: FC<CardProps> = (props) => {
             </button>
           ) : null}
         </div>
-        <div className="w-full pt-2 pl-2 divide-y divide-sky-200">
+        <div className="w-full divide-y divide-sky-200 pt-2 pl-2">
           <div className="h-2/5">
             <h3 className="text-xl text-gray-600">
               {props.title.length === 0 ? "00" : props.title}
