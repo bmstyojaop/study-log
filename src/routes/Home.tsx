@@ -13,6 +13,8 @@ const Home: FC = () => {
     // async関数を使用する時はuseEffectに渡す関数内でさらに関数を宣言する必要がある。
     const getStudyLogs = async () => {
       const studylogRef = collection(db, "studylog");
+      // TODO: limitを指定する
+      // TODO: paginationを実装する
       const data = await getDocs(query(studylogRef, orderBy("createdAt", "desc")));
       setStudyLog(
         data.docs.map((doc) => ({
@@ -26,6 +28,7 @@ const Home: FC = () => {
           detail: doc.data().detail,
           hour: doc.data().hour,
           minute: doc.data().minute,
+          time: doc.data().time,
         }))
       );
     };
@@ -34,8 +37,8 @@ const Home: FC = () => {
   }, []);
 
   return (
-    <div className=" w-screen  hidden-scrollbar overflow-hidden flex justify-center">
-      <div className="h-full hidden-scrollbar overflow-scroll container flex flex-col items-center pt-4 md:flex-row md:flex-wrap md:items-start md:justify-around md:px-4">
+    <div className=" hidden-scrollbar  flex w-screen justify-center overflow-hidden">
+      <div className="hidden-scrollbar container flex h-full flex-col items-center overflow-scroll pt-4 md:flex-row md:flex-wrap md:items-start md:justify-around md:px-4">
         <div className="container flex flex-col items-center pt-4 md:flex-row md:flex-wrap md:items-start md:justify-around md:px-4">
           {studyLog.map((card) => (
             <Card
