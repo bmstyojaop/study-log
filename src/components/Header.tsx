@@ -28,33 +28,33 @@ export const Header: FC<HeaderProps> = ({ user }) => {
             <span className="p-1 text-xl font-black leading-none text-gray-900">StudyLog</span>
           </Link>
         </div>
-        <div className="flex justify-around items-center h-full w-3/4">
-          <nav className="w-full flex justify-around">
-            <Link to={"/"} className="hover:text-indigo-600 flex items-center">
+        <div className="flex h-full w-3/4 items-center justify-around">
+          <nav className="flex w-full justify-around">
+            <Link to={"/"} className="flex items-center hover:text-indigo-600">
               <AiOutlineHome className="inline-block" size={20} />
-              <span className="hidden md:inline-block pl-2">ホーム</span>
+              <span className="hidden pl-2 md:inline-block">ホーム</span>
             </Link>
             {user ? (
               <>
-                <Link to="/record-study" className="hover:text-indigo-600 flex items-center">
+                <Link to="/record-study" className="flex items-center hover:text-indigo-600">
                   <BsPencil className="inline-block" size={20} />
-                  <span className="hidden md:inline-block pl-2">記録</span>
+                  <span className="hidden pl-2 md:inline-block">記録</span>
                 </Link>
-                <Link to="/my-page" className="hover:text-indigo-600 flex items-center">
+                <Link to="/my-page" className="flex items-center hover:text-indigo-600">
                   <AiOutlineAreaChart className="inline-block" size={20} />
-                  <span className="hidden md:inline-block pl-2">マイページ</span>
+                  <span className="hidden pl-2 md:inline-block">マイページ</span>
                 </Link>
               </>
             ) : null}
             {user ? (
-              <button onClick={signOutGoogle} className="hover:text-indigo-600 flex items-center">
-                <GoSignIn className="inline-block" size={20} />
-                <span className="hidden md:inline-block pl-2">ログアウト</span>
+              <button onClick={signOutGoogle} className="flex items-center hover:text-indigo-600">
+                <GoSignOut className="inline-block" size={20} />
+                <span className="hidden pl-2 md:inline-block">ログアウト</span>
               </button>
             ) : (
-              <Link to="/login" className="hover:text-indigo-600 flex items-center">
-                <GoSignOut className="inline-block" size={20} />
-                <span className="hidden md:inline-block pl-2">ログイン</span>
+              <Link to="/login" className="flex items-center hover:text-indigo-600">
+                <GoSignIn className="inline-block" size={20} />
+                <span className="hidden pl-2 md:inline-block">ログイン</span>
               </Link>
             )}
           </nav>
