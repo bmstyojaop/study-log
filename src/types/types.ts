@@ -9,4 +9,5 @@ export type StudyLog = {
   detail: string;
   hour: string;
   minute: string;
+  time: number;
 };
