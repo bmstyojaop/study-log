@@ -46,6 +46,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
       detail: detail,
       hour: hour == "" ? "00" : hour,
       minute: minute == "" ? "00" : minute,
+      time: Number(hour) * 60 + Number(minute),
       updatedAt: serverTimestamp(),
     });
     navigate("/");
@@ -58,20 +59,20 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
   }, []);
 
   return (
-    <div className="flex w-full justify-center h-[90vh]">
+    <div className="flex h-[90vh] w-full justify-center">
       <form
         onSubmit={recordStudy}
-        className="p-5 w-full bg-white md:w-[50rem]  rounded-3xl drop-shadow-md"
+        className="w-full rounded-3xl bg-white p-5  drop-shadow-md md:w-[50rem]"
       >
         <div className="mb-6">
-          <h1 className="text-2xl mb-8 text-center">学習記録</h1>
+          <h1 className="mb-8 text-center text-2xl">学習記録</h1>
           <label htmlFor="title" className=" mb-2 block text-sm font-medium text-gray-900">
             学習内容
           </label>
           <input
             id="title"
             type="text"
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 shadow-sm p-2.5 focus:border-blue-500 focus:ring-blue-500"
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             placeholder="例）数学A 問題集"
             required
             onChange={(e) => setTitle(e.target.value)}
@@ -82,10 +83,10 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
         <div className="mb-6">
           <label htmlFor="hour" className="mb-2 block text-sm font-medium text-gray-900">
             学習時間
-            <span className="text-gray-500 px-1">(時間：分)</span>
+            <span className="px-1 text-gray-500">(時間：分)</span>
           </label>
-          <div className="h-10 block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 shadow-sm px-2.5">
-            <div className="w-full h-full flex items-center">
+          <div className="block h-10 w-full rounded-lg border border-gray-300 bg-gray-50 px-2.5 text-sm text-gray-900 shadow-sm">
+            <div className="flex h-full w-full items-center">
               <input
                 type="number"
                 inputMode="numeric"
@@ -93,7 +94,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
                 min="0"
                 max="99"
                 placeholder="00"
-                className="w-8 outline-none bg-gray-50 text-center focus:bg-sky-100"
+                className="w-8 bg-gray-50 text-center outline-none focus:bg-sky-100"
                 onChange={handleHour}
                 value={hour}
               />
@@ -105,7 +106,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
                 min="0"
                 max="99"
                 placeholder="00"
-                className="w-8 outline-none bg-gray-50 text-center focus:bg-sky-100"
+                className="w-8 bg-gray-50 text-center outline-none focus:bg-sky-100"
                 onChange={handleMinute}
                 value={minute}
               />
@@ -119,16 +120,15 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
           </label>
           <textarea
             id="detail"
-            className="h-40 block w-full rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 shadow-sm p-2.5 focus:border-blue-500 focus:ring-blue-500"
-            required
+            className="block h-40 w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-blue-500 focus:ring-blue-500"
             onChange={(e) => setDetail(e.target.value)}
             value={detail}
           ></textarea>
         </div>
-        <div className="w-full flex justify-center">
+        <div className="flex w-full justify-center">
           <button
             type="submit"
-            className="rounded-lg bg-blue-700 px-5 text-center text-sm font-medium text-white py-2.5 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-3000"
+            className="focus:ring-blue-3000 rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4"
           >
             記録する
           </button>
