@@ -23,13 +23,12 @@ export const Header: FC<HeaderProps> = ({ user }) => {
   return (
     <header className="h-20 select-none">
       <div className="container mx-auto flex h-20 flex-wrap items-center overflow-hidden font-medium lg:justify-center">
-        <div className="flex h-full w-1/4 items-center justify-start pr-4">
-          <Link to="/" className="inline-block py-4 md:py-0">
-            <span className="p-1 text-xl font-black leading-none text-gray-900">StudyLog</span>
-          </Link>
-        </div>
-        <div className="flex h-full w-3/4 items-center justify-around">
+        <div className="flex h-full w-full items-center justify-around">
+          {/* <div className="flex h-full w-3/4 items-center justify-around"> */}
           <nav className="flex w-full justify-around">
+            <Link to="/" className="inline-block py-4 md:py-0">
+              <span className="p-1 text-xl font-black leading-none text-gray-900">StudyLog</span>
+            </Link>
             <Link to={"/"} className="flex items-center hover:text-indigo-600">
               <AiOutlineHome className="inline-block" size={20} />
               <span className="hidden pl-2 md:inline-block">ホーム</span>
