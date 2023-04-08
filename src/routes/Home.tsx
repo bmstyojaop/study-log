@@ -9,7 +9,6 @@ const Home: FC = () => {
   const [studyLog, setStudyLog] = useState<StudyLog[]>([]);
 
   useEffect(() => {
-    console.log("useEffect");
     // async関数を使用する時はuseEffectに渡す関数内でさらに関数を宣言する必要がある。
     const getStudyLogs = async () => {
       const studylogRef = collection(db, "studylog");
@@ -44,7 +43,7 @@ const Home: FC = () => {
             <Card
               key={card.id}
               id={card.id}
-              iconPath="/assets/img/testicon1.jpg"
+              iconPath="assets/img/no-profile.png"
               title={card.title}
               detail={card.detail}
               hour={card.hour}
