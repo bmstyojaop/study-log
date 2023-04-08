@@ -28,11 +28,13 @@ export const Card: FC<CardProps> = (props) => {
     <article className="md:w-100 h-52 w-96 p-3">
       <div className="flex h-full w-full rounded-lg bg-white p-3 shadow-md">
         <div className="flex w-1/5 flex-col items-center justify-between">
-          <img
-            className="aspect-square w-full rounded-full border-2 shadow-sm"
-            alt="アイコン"
-            src={props?.iconPath}
-          />
+          <div className="flex h-full w-12 justify-center overflow-hidden">
+            <img
+              className=" h-12  w-full rounded-full border-[1px]"
+              alt="アイコン"
+              src={props?.iconPath}
+            />
+          </div>
           {props.uid === auth.currentUser?.uid ? (
             <button onClick={() => handleDelete(props.id)}>
               <RiDeleteBin6Line
