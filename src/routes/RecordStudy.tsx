@@ -1,4 +1,5 @@
 import type { User } from "@firebase/auth";
+import { Metric } from "@tremor/react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import React, { ChangeEventHandler, FC, FormEvent, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,58 +15,77 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
   const [detail, setDetail] = useState("");
   const [hour, setHour] = useState("");
   const [minute, setMinute] = useState("");
+  const [time, setTime] = useState(0);
 
   const navigate = useNavigate();
 
-  const handleHour: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    if (parseInt(e.target.value) > parseInt(e.target.max) || e.target.value.length > 2) {
-      setHour("");
-      return;
-    }
-    setHour(e.target.value.trim());
-  }, []);
+  const handleHour: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      if (parseInt(e.target.value) > parseInt(e.target.max) || e.target.value.length > 2) {
+        setHour("");
+        setTime(parseInt("0") * 60 + parseInt(minute));
+        return;
+      }
+      setHour(e.target.value.trim());
+      setTime(
+        parseInt(e.target.value.trim() === "" ? "0" : e.target.value.trim()) * 60 +
+          parseInt(minute === "" ? "0" : minute)
+      );
+    },
+    [minute]
+  );
 
-  const handleMinute: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    if (parseInt(e.target.value) > parseInt(e.target.max) || e.target.value.length > 2) {
-      setMinute("");
-      return;
-    }
-    setMinute(e.target.value.trim());
-  }, []);
+  const handleMinute: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      if (parseInt(e.target.value) > parseInt(e.target.max) || e.target.value.length > 2) {
+        setMinute("");
+        setTime(parseInt(hour) * 60 + parseInt("0"));
+        return;
+      }
+      setMinute(e.target.value.trim());
+      setTime(
+        parseInt(hour === "" ? "0" : hour) * 60 +
+          parseInt(e.target.value.trim() === "" ? "0" : e.target.value.trim())
+      );
+    },
+    [hour]
+  );
 
-  // Add a new document with a generated id.
+  useEffect(() => {
+    console.log(time);
+  }, [time]);
+
   const recordStudy = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     await addDoc(collection(db, "studylog"), {
       title: title,
       author: {
         id: auth.currentUser?.uid,
+        photoUrl: auth.currentUser?.photoURL,
         username: auth.currentUser?.displayName,
       },
       createdAt: serverTimestamp(),
       detail: detail,
-      hour: hour == "" ? "00" : hour,
-      minute: minute == "" ? "00" : minute,
-      time: Number(hour) * 60 + Number(minute),
+      hour: `${Math.floor(time / 60)}`,
+      minute: `${time % 60}`,
+      time: time,
       updatedAt: serverTimestamp(),
     });
     navigate("/");
   };
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, []);
-
+  if (!user) {
+    return <div>学習を記録するにはログインが必要です。</div>;
+  }
   return (
-    <div className="flex h-[90vh] w-full justify-center">
+    <div className="flex w-full justify-center">
       <form
         onSubmit={recordStudy}
-        className="w-full rounded-3xl bg-white p-5  drop-shadow-md md:w-[50rem]"
+        className="w-full rounded-3xl bg-white p-5 drop-shadow-md md:w-[50rem]"
       >
         <div className="mb-6">
-          <h1 className="mb-8 text-center text-2xl">学習記録</h1>
+          <Metric className=" text-center text-gray-600">学習を記録</Metric>
           <label htmlFor="title" className=" mb-2 block text-sm font-medium text-gray-900">
             学習内容
           </label>
@@ -92,7 +112,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
                 inputMode="numeric"
                 id="hour"
                 min="0"
-                max="99"
+                max="24"
                 placeholder="00"
                 className="w-8 bg-gray-50 text-center outline-none focus:bg-sky-100"
                 onChange={handleHour}
@@ -114,7 +134,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
           </div>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 ">
           <label htmlFor="detail" className="mb-2 block text-sm font-medium text-gray-900">
             メモ
           </label>
@@ -125,10 +145,10 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
             value={detail}
           ></textarea>
         </div>
-        <div className="flex w-full justify-center">
+        <div className="flex w-full justify-center py-5">
           <button
             type="submit"
-            className="focus:ring-blue-3000 rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4"
+            className="focus:ring-blue-3000 rounded-lg bg-blue-700 px-10 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4"
           >
             記録する
           </button>
