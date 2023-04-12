@@ -24,10 +24,9 @@ export const Header: FC<HeaderProps> = ({ user }) => {
     <header className="h-20 select-none">
       <div className="container mx-auto flex h-20 flex-wrap items-center overflow-hidden font-medium lg:justify-center">
         <div className="flex h-full w-full items-center justify-around">
-          {/* <div className="flex h-full w-3/4 items-center justify-around"> */}
           <nav className="flex w-full justify-around">
             <Link to="/" className="inline-block py-4 md:py-0">
-              <span className="p-1 text-xl font-black leading-none text-gray-900">StudyLog</span>
+              <span className="p-1 text-xl font-black leading-none text-gray-900">JustDoIt</span>
             </Link>
             <Link to={"/"} className="flex items-center hover:text-indigo-600">
               <AiOutlineHome className="inline-block" size={20} />
