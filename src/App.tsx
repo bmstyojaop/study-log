@@ -25,7 +25,7 @@ const App = () => {
         <Route path="my-page" element={<MyPage user={user} />} />
         <Route path="record-study" element={<RecordStudy user={user} />}></Route>
         <Route path="/login" element={<SignIn user={user} />}></Route>
-        <Route path="/logout" element={<SignOut user={user} />}></Route>
+        <Route path="/logout" element={<SignOut />}></Route>
         <Route path="*" element={<NoMatch />} />
       </Route>
     </Routes>
