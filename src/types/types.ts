@@ -3,6 +3,7 @@ export type StudyLog = {
   title: string;
   author: {
     id: string;
+    photoUrl: string;
     username: string;
   };
   createdAt: string;

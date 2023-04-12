@@ -1,4 +1,4 @@
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import React, { FC, useEffect, useState } from "react";
 
 import { Card } from "../components/Card";
@@ -14,13 +14,14 @@ const Home: FC = () => {
       const studylogRef = collection(db, "studylog");
       // TODO: limitを指定する
       // TODO: paginationを実装する
-      const data = await getDocs(query(studylogRef, orderBy("createdAt", "desc")));
+      const data = await getDocs(query(studylogRef, orderBy("createdAt", "desc"), limit(100)));
       setStudyLog(
         data.docs.map((doc) => ({
           id: doc.id,
           title: doc.data().title,
           author: {
             id: doc.data().author.id,
+            photoUrl: doc.data().author.photoUrl,
             username: doc.data().author.username,
           },
           createdAt: doc.data().timestamp,
@@ -43,7 +44,7 @@ const Home: FC = () => {
             <Card
               key={card.id}
               id={card.id}
-              iconPath="assets/img/no-profile.png"
+              iconPath={card.author.photoUrl}
               title={card.title}
               detail={card.detail}
               hour={card.hour}
