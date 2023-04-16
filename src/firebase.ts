@@ -2,6 +2,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
+// こちらのAPI情報はクライアント側で使用する公開前提のものです。
+// FireStoreのデータを守る唯一の方法はRulesです。
 const firebaseConfig = {
   apiKey: "AIzaSyAZYnilNeaWBAJu4PyT2YQKlTqLp2wXMPY",
   appId: "1:59171733717:web:e8d7cabd91f28d4fcd625c",
