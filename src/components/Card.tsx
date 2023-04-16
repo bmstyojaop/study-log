@@ -22,7 +22,7 @@ type CardProps = {
 };
 
 export const Card: FC<CardProps> = (props) => {
-  const [Modal, open, close, isOpen] = useModal("root", {});
+  const [Modal, open, close] = useModal("root", {});
   const handleDelete = async (id: string) => {
     await deleteDoc(doc(db, "studylog", id));
     props.setStudyLog(props.studyLog.filter((doc: StudyLog) => doc.id != id));
