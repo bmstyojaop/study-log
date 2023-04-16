@@ -148,7 +148,7 @@ export const RecordStudy: FC<RecordStudyProps> = ({ user }) => {
         <div className="flex w-full justify-center py-5">
           <button
             type="submit"
-            className="focus:ring-blue-3000 rounded-lg bg-blue-700 px-10 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4"
+            className="focus:ring-blue-3000 rounded-lg  border border-sky-800 px-10 py-2.5 text-center text-sm font-medium text-sky-800 duration-300 hover:border-white hover:bg-sky-500 hover:text-white active:bg-sky-800"
           >
             記録する
           </button>
