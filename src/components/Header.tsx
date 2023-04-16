@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { AiOutlineAreaChart, AiOutlineHome } from "react-icons/ai";
 import { BsPencil } from "react-icons/bs";
 import { GoSignIn, GoSignOut } from "react-icons/go";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { auth } from "../firebase";
 
@@ -28,32 +28,60 @@ export const Header: FC<HeaderProps> = ({ user }) => {
             <Link to="/" className="inline-block py-4 md:py-0">
               <span className="p-1 text-xl font-black leading-none text-gray-900">JustDoIt</span>
             </Link>
-            <Link to={"/"} className="flex items-center hover:text-indigo-600">
+            <NavLink
+              to={"/"}
+              className={({ isActive, isPending }) =>
+                isPending || isActive
+                  ? "flex items-center text-indigo-600"
+                  : "flex items-center hover:text-indigo-400"
+              }
+            >
               <AiOutlineHome className="inline-block" size={20} />
               <span className="hidden pl-2 md:inline-block">ホーム</span>
-            </Link>
+            </NavLink>
             {user ? (
               <>
-                <Link to="/record-study" className="flex items-center hover:text-indigo-600">
+                <NavLink
+                  to="/record-study"
+                  className={({ isActive, isPending }) =>
+                    isPending || isActive
+                      ? "flex items-center text-indigo-600"
+                      : "flex items-center hover:text-indigo-400"
+                  }
+                >
                   <BsPencil className="inline-block" size={20} />
                   <span className="hidden pl-2 md:inline-block">記録</span>
-                </Link>
-                <Link to="/my-page" className="flex items-center hover:text-indigo-600">
+                </NavLink>
+                <NavLink
+                  to="/my-page"
+                  className={({ isActive, isPending }) =>
+                    isPending || isActive
+                      ? "flex items-center text-indigo-600"
+                      : "flex items-center hover:text-indigo-400"
+                  }
+                >
                   <AiOutlineAreaChart className="inline-block" size={20} />
                   <span className="hidden pl-2 md:inline-block">マイページ</span>
-                </Link>
+                </NavLink>
               </>
             ) : null}
             {user ? (
-              <button onClick={signOutGoogle} className="flex items-center hover:text-indigo-600">
+              <button onClick={signOutGoogle} className="flex items-center hover:text-indigo-400">
                 <GoSignOut className="inline-block" size={20} />
                 <span className="hidden pl-2 md:inline-block">ログアウト</span>
               </button>
             ) : (
-              <Link to="/login" className="flex items-center hover:text-indigo-600">
+              <NavLink
+                to="/login"
+                className={({ isActive, isPending }) =>
+                  isPending || isActive
+                    ? "flex items-center text-indigo-600"
+                    : "flex items-center hover:text-indigo-400"
+                }
+              >
                 <GoSignIn className="inline-block" size={20} />
                 <span className="hidden pl-2 md:inline-block">ログイン</span>
-              </Link>
+              </NavLink>
             )}
           </nav>
         </div>
