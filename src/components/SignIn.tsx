@@ -1,6 +1,7 @@
 import type { User } from "@firebase/auth";
 import { signInWithPopup } from "firebase/auth";
 import { FC, useEffect } from "react";
+import { FcGoogle } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 
 import { auth, provider } from "../firebase";
@@ -25,9 +26,21 @@ export const SignIn: FC<SignInProps> = ({ user }) => {
   }, [user, navigate]);
 
   return (
-    <div>
-      <p>ログインして始める</p>
-      <button onClick={loginWithGoogle}>Googleでログイン</button>
+    <div className=" flex w-screen justify-center  p-5 ">
+      <div className="h-96 w-full max-w-xl rounded-2xl bg-white p-5 px-10">
+        <h2 className=" pb-4 text-center text-2xl text-gray-600">ログイン方法を選択</h2>
+        <ul>
+          <li className="flex justify-center">
+            <button
+              className="flex  items-center rounded-lg border border-sky-800 px-10 py-2.5 text-center text-lg  font-medium text-sky-800 duration-300 hover:border-white hover:bg-sky-500 hover:text-white  active:bg-sky-800"
+              onClick={loginWithGoogle}
+            >
+              <FcGoogle className="mr-1" />
+              Googleアカウント
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
